@@ -45,8 +45,8 @@ function add(list) {
 	const listItem=document.createElement("li");
 	listItem.innerHTML=`<a href="#${list.getAttribute("id")}">${list.getAttribute("data-nav")}</a>`;
 	listItem.style.cssText="list-style:none;text-decoration:none;";
+
 		listItem.addEventListener("click",(evt)=>{evt.preventDefault()});
-       // listItem.scrollIntoView({"behavior":"smooth"});
        
 	fragment.appendChild(listItem);
 }
@@ -61,6 +61,7 @@ function remove(active) {
 		active.classList.remove("your-active-class");
 
 }
+sectionList.forEach(remove);
 
 function activeSection(active) {
 	
@@ -68,8 +69,8 @@ function activeSection(active) {
 			sectionList.forEach(remove);
 			 //remove active class from item list
             navChild.forEach((element)=>{
-            	if(element.className=="active")
-            element.classList.remove("active");
+            	if(element.className=="activeNav")
+            element.classList.remove("activeNav");
             });
 			sectionList.forEach((element)=>{
             if(element.getAttribute("data-nav")==data)
@@ -77,6 +78,7 @@ function activeSection(active) {
             currentCursor=element;//store active section
 
             navChild.forEach(activeLink);
+  
             }
 
 			});
@@ -86,12 +88,11 @@ function activeSection(active) {
 nav.addEventListener("click",activeSection);
 function activeLink(active){
 let navData=currentCursor.getAttribute("data-nav");
-if (active.className=="active") {
+if (active.className=="activeNav") {
 return;
 }
 else if(navData==active.textContent){
-	active.classList.remove("non-active");
-active.classList.add("active");
+active.classList.add("activeNav");
 }
 }
 
@@ -111,8 +112,8 @@ return;
 }
 
 });
-console.log(element);
 }
+
 
 /**
  * End Main Functions
