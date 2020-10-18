@@ -45,9 +45,12 @@ function add(list) {
 	const listItem=document.createElement("li");
 	listItem.innerHTML=`<a href="#${list.getAttribute("id")}">${list.getAttribute("data-nav")}</a>`;
 	listItem.style.cssText="list-style:none;text-decoration:none;";
+		listItem.addEventListener("click",(evt)=>{evt.preventDefault()});
+       // listItem.scrollIntoView({"behavior":"smooth"});
+       
 	fragment.appendChild(listItem);
 }
-let navChild=document.querySelectorAll("#navbar__list li");//Store All list item
+const navChild=document.querySelectorAll("#navbar__list li");//Store All list item
 
 
 
@@ -74,8 +77,6 @@ function activeSection(active) {
             currentCursor=element;//store active section
 
             navChild.forEach(activeLink);
-
-            
             }
 
 			});
@@ -95,7 +96,23 @@ active.classList.add("active");
 }
 
 // Scroll to anchor ID using scrollTO event
+nav.addEventListener("click",scroll);
 
+function scroll(item){
+let scroller=item.target.getAttribute("href");
+let element;
+sectionList.forEach((sc)=>{
+	if(sc.getAttribute("class")=="your-active-class")
+	{
+		element=sc;
+element.scrollIntoView({"behavior":"smooth"});
+return;
+
+}
+
+});
+console.log(element);
+}
 
 /**
  * End Main Functions
