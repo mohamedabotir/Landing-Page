@@ -113,7 +113,29 @@ return;
 
 });
 }
+//Highlighting while Scrolling
+window.addEventListener("scroll",()=>{
+sectionList.forEach((element)=>{
+const data=element.getAttribute("data-nav");
+const scrolled=element.getBoundingClientRect();
+if(scrolled.top>=0&&scrolled.bottom<window.innerHeight)
+{element.classList.add("your-active-class");
 
+navChild.forEach((nav)=>{
+if(nav.textContent==data)
+{
+nav.setAttribute("class","activeNav");
+}
+else
+nav.classList.remove("activeNav");
+});
+}
+else{
+element.classList.remove("your-active-class");
+
+}
+});
+});
 
 /**
  * End Main Functions
